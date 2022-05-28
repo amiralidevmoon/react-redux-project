@@ -3,7 +3,7 @@ import React, {useState} from "react";
 const Header = () => {
     const [burgerMenu, setburgerMenu] = useState(false);
     return (
-        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-10 z-50 absolute grid place-items-center">
+        <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 sticky top-10 relative grid place-items-center">
             <div className="container flex flex-wrap justify-between items-center mx-auto absolute border p-3 rounded-md border-blue-900">
                 <a href="#" className="flex">
                     <svg
@@ -26,7 +26,7 @@ const Header = () => {
                         ></path>
                     </svg>
                     <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white">
-            FlowBite
+            Users List Manager
           </span>
                 </a>
                 <button
