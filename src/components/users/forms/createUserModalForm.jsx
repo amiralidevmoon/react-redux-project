@@ -1,8 +1,9 @@
 /* This example requires Tailwind CSS v2.0+ */
-import React, {Fragment, useRef, useState} from 'react'
+import React, {Fragment, useEffect, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {useDispatch} from "react-redux";
 import {addUser} from "../../../store/slices/usersSlice"
+import {addUserFromService} from "../../../services/usersService";
 
 export default function CreateUserModalForm() {
     const [open, setOpen] = useState(false)
@@ -18,6 +19,7 @@ export default function CreateUserModalForm() {
             company: '',
             phoneNumber: '',
             email: '',
+            password: (Math.random() * 1000).toString(),
             country: 'IR',
             gender: 'male',
             isActive: false,
@@ -26,6 +28,10 @@ export default function CreateUserModalForm() {
         }
     );
 
+    useEffect(() => {
+        createUserHandler();
+    }, []);
+
     // handle create user submit form
     const createUserHandler = async (e) => {
         e.preventDefault();
@@ -33,8 +39,13 @@ export default function CreateUserModalForm() {
         setOpen(false);
 
         if (user) {
-            dispatch(addUser(user))
-            setUser({})
+            try {
+                let newUser = await addUserFromService(user);
+                dispatch(addUser(newUser));
+                setUser({});
+            } catch (error) {
+                console.log(error.response.data.message)
+            }
         }
     }
 
