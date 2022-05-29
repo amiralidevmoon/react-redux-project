@@ -1,11 +1,15 @@
 /* This example requires Tailwind CSS v2.0+ */
 import React, {Fragment, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
+import {useDispatch} from "react-redux";
+import {addUser} from "../../../store/slices/usersSlice"
 
 export default function CreateUserModalForm() {
     const [open, setOpen] = useState(false)
 
     const cancelButtonRef = useRef(null)
+
+    const dispatch = useDispatch()
 
     const [user, setUser] = useState(
         {
@@ -29,7 +33,7 @@ export default function CreateUserModalForm() {
         setOpen(false);
 
         if (user) {
-            console.log(user)
+            dispatch(addUser(user))
             setUser({})
         }
     }
@@ -180,26 +184,26 @@ export default function CreateUserModalForm() {
                                                 </div>
                                                 <div className="flex items-start mb-6">
                                                     <div className="flex items-center h-5">
-                                                        <input id="remember" type="checkbox" value=""
+                                                        <input id="isAdmin" type="checkbox" value=""
                                                                className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                                               required onChange={(e) => setUser({
-                                                            ...user,
-                                                            isAdmin: e.target.checked
-                                                        })}/>
+                                                               onChange={(e) => setUser({
+                                                                   ...user,
+                                                                   isAdmin: e.target.checked
+                                                               })}/>
                                                     </div>
-                                                    <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is
+                                                    <label htmlFor="isAdmin" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is
                                                         this user an admin ?</label>
                                                 </div>
                                                 <div className="flex items-start mb-6">
                                                     <div className="flex items-center h-5">
-                                                        <input id="remember" type="checkbox" value=""
+                                                        <input id="isActive" type="checkbox" value=""
                                                                className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                                               required onChange={(e) => setUser({
-                                                            ...user,
-                                                            isActive: e.target.checked
-                                                        })}/>
+                                                               onChange={(e) => setUser({
+                                                                   ...user,
+                                                                   isActive: e.target.checked
+                                                               })}/>
                                                     </div>
-                                                    <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is
+                                                    <label htmlFor="isActive" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is
                                                         this user active ?</label>
                                                 </div>
                                                 <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">

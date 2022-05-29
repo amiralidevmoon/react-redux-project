@@ -4,7 +4,7 @@ import CreateUserModalForm from "../../components/users/forms/createUserModalFor
 
 function Home() {
     const users = useSelector((state) => state.users)
-
+    console.log(users);
     return (
         <div className="relative overflow-x-auto sm:rounded-lg top-52 max-w-screen-xl mx-auto grid place-items-center p-5">
             <CreateUserModalForm/>
