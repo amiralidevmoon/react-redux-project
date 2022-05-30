@@ -8,16 +8,19 @@ export const usersSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        setUsers: (state, action) => {
-            state.list = action.payload;
+        setUsers: (state, {payload}) => {
+            state.list = payload;
         },
-        addUser: (state, action) => {
-            state.list.push(action.payload);
+        addUser: (state, {payload}) => {
+            state.list.push(payload);
+        },
+        deleteUser: (state, {payload}) => {
+            state.list = state.list.filter(user => user.id !== payload)
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const {setUsers, addUser} = usersSlice.actions
+export const {setUsers, addUser, deleteUser} = usersSlice.actions
 
 export default usersSlice.reducer

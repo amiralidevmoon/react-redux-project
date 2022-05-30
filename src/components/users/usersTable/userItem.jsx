@@ -1,8 +1,8 @@
 import React from 'react';
-import {PencilAltIcon, TrashIcon} from '@heroicons/react/solid'
+import {PencilAltIcon} from '@heroicons/react/solid'
+import UserDelete from "./userDelete";
 
 function UserItem({user}) {
-    console.log(user)
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition duration-200">
             <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-center">
@@ -37,7 +37,7 @@ function UserItem({user}) {
             </td>
             <td className="px-6 py-4 text-right flex gap-4 text-center ml-6">
                 <PencilAltIcon className="h-5 w-5 text-blue-400 hover:text-blue-500 transition duration-200"/>
-                <TrashIcon className="h-5 w-5 text-rose-500 hover:text-rose-700 transition duration-200"/>
+                <UserDelete userId={user.id}/>
             </td>
         </tr>
     );

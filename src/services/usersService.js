@@ -16,4 +16,8 @@ export const addUserFromService = async (user) => {
     return res.data.data;
 }
 
+export const deleteUserFromService = async (userId) => {
+    await usersService.delete(`/users/${userId}`);
+}
+
 export default usersService;
