@@ -13,8 +13,12 @@ function UsersList() {
     }, [])
 
     const getUsers = async () => {
-        let users = await getUsersFromService();
-        dispatch(setUsers(users));
+        try {
+            let users = await getUsersFromService();
+            dispatch(setUsers(users));
+        } catch (error) {
+            console.log(error.response)
+        }
     }
 
     const usersList = useSelector((state) => state.users.list);
