@@ -16,6 +16,13 @@ export const usersSlice = createSlice({
         },
         deleteUser: (state, {payload}) => {
             state.list = state.list.filter(user => user.id !== payload)
+        },
+        editUser: (state, {payload}) => {
+            state.list = state.list.map(user => {
+                return user.id === payload.id
+                    ? {...user, ...payload}
+                    : user;
+            })
         }
     },
 })

@@ -1,5 +1,5 @@
 import React from 'react';
-import {PencilAltIcon} from '@heroicons/react/solid'
+import UserEdit from "./userEdit";
 import UserDelete from "./userDelete";
 
 function UserItem({user}) {
@@ -36,7 +36,7 @@ function UserItem({user}) {
                 {new Date(user.createdAt).toLocaleDateString('fa-IR')}
             </td>
             <td className="px-6 py-4 text-right flex gap-4 text-center ml-6">
-                <PencilAltIcon className="h-5 w-5 text-blue-400 hover:text-blue-500 transition duration-200"/>
+                <UserEdit user={user}/>
                 <UserDelete userId={user.id}/>
             </td>
         </tr>

@@ -5,6 +5,7 @@ import {deleteUserFromService} from "../../../services/usersService";
 import {deleteUser} from "../../../store/slices/usersSlice";
 import {useDispatch} from "react-redux";
 import {TrashIcon} from "@heroicons/react/solid";
+import {setLoading} from "../../../store/slices/loadingSlice";
 
 function UserDelete({userId}) {
     const [openModalDelete, setOpenModalDelete] = useState(false)
@@ -15,12 +16,15 @@ function UserDelete({userId}) {
 
     // deleting user handler
     let deleteHandler = async () => {
+        dispatch(setLoading(true));
+        
         setOpenModalDelete(false);
 
         try {
             await deleteUserFromService(userId)
 
             dispatch(deleteUser(userId));
+            dispatch(setLoading(false))
         } catch (error) {
             console.log(error.response)
         }

@@ -20,4 +20,9 @@ export const deleteUserFromService = async (userId) => {
     await usersService.delete(`/users/${userId}`);
 }
 
+export const editUserFromService = async (user) => {
+    await usersService.put(`/users/${user.id}`, user);
+}
+
+
 export default usersService;
