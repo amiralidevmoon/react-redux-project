@@ -2,7 +2,7 @@
 import React, {Fragment, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {useDispatch} from "react-redux";
-import {addUser} from "../../../store/slices/usersSlice"
+import {addUser} from "../../../store/slices/usersSlice";
 import {addUserFromService} from "../../../services/usersService";
 
 export default function CreateUserModalForm() {

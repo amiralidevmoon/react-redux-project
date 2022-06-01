@@ -21,7 +21,8 @@ export const deleteUserFromService = async (userId) => {
 }
 
 export const editUserFromService = async (user) => {
-    await usersService.put(`/users/${user.id}`, user);
+    let res = await usersService.put(`/users/${user.id}`, user);
+    return res.data.data;
 }
 
 

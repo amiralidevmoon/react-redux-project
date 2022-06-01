@@ -2,10 +2,11 @@
 import React, {Fragment, useRef, useState} from 'react'
 import {Dialog, Transition} from '@headlessui/react'
 import {useDispatch} from "react-redux";
-import {addUser} from "../../../store/slices/usersSlice"
-import {addUserFromService} from "../../../services/usersService";
 import {PencilAltIcon} from "@heroicons/react/solid";
 import {setLoading} from "../../../store/slices/loadingSlice";
+import {sweetAlert} from "../../../helpers/helpers";
+import {editUser} from "../../../store/slices/usersSlice";
+import {editUserFromService} from "../../../services/usersService";
 
 export default function UserEdit({user}) {
     const [open, setOpen] = useState(false)
@@ -14,38 +15,39 @@ export default function UserEdit({user}) {
 
     const dispatch = useDispatch()
 
-    const [editUser, setUser] = useState(
+    const [editedUser, setUser] = useState(
         {
-            firstName: '',
-            lastName: '',
-            company: '',
-            phoneNumber: '',
-            email: '',
-            password: (Math.random() * 1000).toString(),
-            country: 'IR',
-            gender: 'male',
-            isActive: false,
-            isAdmin: false,
-            createdAt: Date.now(),
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            company: user.company,
+            phoneNumber: user.phoneNumber,
+            email: user.email,
+            country: user.country,
+            gender: user.gender,
+            isActive: user.isActive,
+            isAdmin: user.isAdmin,
         }
     );
 
     // handle create user submit form
     const createUserHandler = async (e) => {
-        dispatch(setLoading(true))
-
         e.preventDefault();
+
+        dispatch(setLoading(true));
 
         setOpen(false);
 
-        if (user) {
+        if (editedUser) {
             try {
-                let newUser = await addUserFromService(user);
-                dispatch(addUser(newUser));
+                await editUserFromService(editedUser);
+                dispatch(editUser(editedUser));
                 setUser({});
-                dispatch(setLoading(false))
+                dispatch(setLoading(false));
+                sweetAlert('ویرایش شما با موفقیت انجام شد.');
             } catch (error) {
-                console.log(error.response.data.message)
+                console.log(error)
+                dispatch(setLoading(false));
             }
         }
     }
@@ -97,10 +99,11 @@ export default function UserEdit({user}) {
                                                             name</label>
                                                         <input type="text" id="first_name"
                                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                               placeholder="Amir Ali" required value={user.firstName} onChange={(e) => setUser({
-                                                            ...editUser,
-                                                            firstName: e.target.value
-                                                        })}/>
+                                                               placeholder="Amir Ali" required defaultValue={user.firstName}
+                                                               onChange={(e) => setUser({
+                                                                   ...editedUser,
+                                                                   firstName: e.target.value
+                                                               })}/>
                                                     </div>
                                                     <div>
                                                         <label htmlFor="last_name"
@@ -108,8 +111,8 @@ export default function UserEdit({user}) {
                                                             name</label>
                                                         <input type="text" id="last_name"
                                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                               placeholder="Taheri" required value={user.lastName} onChange={(e) => setUser({
-                                                            ...editUser,
+                                                               placeholder="Taheri" required defaultValue={user.lastName} onChange={(e) => setUser({
+                                                            ...editedUser,
                                                             lastName: e.target.value
                                                         })}/>
                                                     </div>
@@ -118,8 +121,8 @@ export default function UserEdit({user}) {
                                                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Company</label>
                                                         <input type="text" id="company"
                                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                               placeholder="Roocket" required value={user.company} onChange={(e) => setUser({
-                                                            ...editUser,
+                                                               placeholder="Roocket" required defaultValue={user.company} onChange={(e) => setUser({
+                                                            ...editedUser,
                                                             company: e.target.value
                                                         })}/>
                                                     </div>
@@ -129,9 +132,9 @@ export default function UserEdit({user}) {
                                                             number</label>
                                                         <input type="tel" id="phone"
                                                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                               placeholder="+98" required value={user.phoneNumber}
+                                                               placeholder="+98" required defaultValue={user.phoneNumber}
                                                                onChange={(e) => setUser({
-                                                                   ...editUser,
+                                                                   ...editedUser,
                                                                    phoneNumber: e.target.value
                                                                })}/>
                                                     </div>
@@ -142,9 +145,9 @@ export default function UserEdit({user}) {
                                                         address</label>
                                                     <input type="email" id="email"
                                                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                           placeholder="amiralidevmoon@gmail.com" value={user.email} required
+                                                           placeholder="amiralidevmoon@gmail.com" defaultValue={user.email} required
                                                            onChange={(e) => setUser({
-                                                               ...editUser,
+                                                               ...editedUser,
                                                                email: e.target.value
                                                            })}/>
                                                 </div>
@@ -154,7 +157,7 @@ export default function UserEdit({user}) {
                                                         defaultValue={user.country}
                                                         className="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                         onChange={(e) => setUser({
-                                                            ...editUser,
+                                                            ...editedUser,
                                                             country: e.target.value
                                                         })}
                                                 >
@@ -174,9 +177,9 @@ export default function UserEdit({user}) {
                                                             <input id="inline-radio" type="radio" value="male" name="inline-radio-group"
                                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                                    onChange={(e) => setUser({
-                                                                       ...editUser,
+                                                                       ...editedUser,
                                                                        gender: e.target.value
-                                                                   })} checked={user.gender === 'male'}/>
+                                                                   })} defaultChecked={user.gender === 'male'}/>
                                                             <label htmlFor="inline-radio"
                                                                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Male</label>
                                                         </div>
@@ -184,9 +187,9 @@ export default function UserEdit({user}) {
                                                             <input id="inline-2-radio" type="radio" value="female" name="inline-radio-group"
                                                                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                                                    onChange={(e) => setUser({
-                                                                       ...editUser,
+                                                                       ...editedUser,
                                                                        gender: e.target.value
-                                                                   })} checked={user.gender === 'female'}/>
+                                                                   })} defaultChecked={user.gender === 'female'}/>
                                                             <label htmlFor="inline-2-radio"
                                                                    className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Female</label>
                                                         </div>
@@ -197,7 +200,7 @@ export default function UserEdit({user}) {
                                                         <input id="isAdmin" type="checkbox" value=""
                                                                className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                                                                onChange={(e) => setUser({
-                                                                   ...editUser,
+                                                                   ...editedUser,
                                                                    isAdmin: e.target.checked
                                                                })} defaultChecked={user.isAdmin}/>
                                                     </div>
@@ -209,7 +212,7 @@ export default function UserEdit({user}) {
                                                         <input id="isActive" type="checkbox" value=""
                                                                className="w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                                                                onChange={(e) => setUser({
-                                                                   ...editUser,
+                                                                   ...editedUser,
                                                                    isActive: e.target.checked
                                                                })} defaultChecked={user.isActive}/>
                                                     </div>
