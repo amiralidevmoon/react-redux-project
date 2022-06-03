@@ -1,8 +1,8 @@
 import React from 'react';
-import UserEdit from "./userEdit";
-import UserDelete from "./userDelete";
+import Edit from "./actions/edit";
+import UserDelete from "./actions/delete";
 
-function UserItem({user}) {
+function Item({user}) {
     return (
         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition duration-200">
             <th scope="row" className="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap text-center">
@@ -29,18 +29,18 @@ function UserItem({user}) {
             <td className="px-6 py-4 text-center">
                 {user.isAdmin ? 'Admin' : 'User'}
             </td>
-            <td className="px-6 py-4 text-center">
+            <td className={`px-6 py-4 text-center ${user.isActive ? 'text-green-500' : 'text-red-500'}`}>
                 {user.isActive ? 'Active' : 'Disabled'}
             </td>
             <td className="px-6 py-4 text-center">
                 {new Date(user.createdAt).toLocaleDateString('fa-IR')}
             </td>
             <td className="px-6 py-4 text-right flex gap-4 text-center ml-6">
-                <UserEdit user={user}/>
+                <Edit user={user}/>
                 <UserDelete userId={user.id}/>
             </td>
         </tr>
     );
 }
 
-export default UserItem;
+export default React.memo(Item);

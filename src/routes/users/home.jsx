@@ -1,14 +1,18 @@
 import React from 'react';
-import CreateUserModalForm from "../../components/users/forms/createUserModalForm";
-import UsersList from "../../components/users/usersTable/usersList";
+import Create from "../../components/users/actions/create";
+import List from "../../components/users/list";
+import Filter from "../../components/users/filter";
 
 function Home() {
     return (
         <div className="relative overflow-x-auto sm:rounded-lg top-52 max-w-screen-2xl mx-auto grid place-items-center p-5">
-            <CreateUserModalForm/>
-            <UsersList/>
+            <div className="flex w-full justify-between">
+                <Filter/>
+                <Create/>
+            </div>
+            <List/>
         </div>
     );
 }
 
-export default Home; 
+export default React.memo(Home);

@@ -25,5 +25,10 @@ export const editUserFromService = async (user) => {
     return res.data.data;
 }
 
+export const filterUserFromService = async (count) => {
+    let res = await usersService.get(`/users?page=1&limit=${count}`);
+    return res.data.data;
+}
+
 
 export default usersService;

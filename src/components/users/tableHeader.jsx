@@ -1,6 +1,6 @@
 import React from 'react';
 
-function HeaderTable({headerFields}) {
+function TableHeader({headerFields}) {
     return (
         <thead className="text-xs text-center text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
@@ -16,4 +16,4 @@ function HeaderTable({headerFields}) {
     );
 }
 
-export default HeaderTable;
+export default React.memo(TableHeader);

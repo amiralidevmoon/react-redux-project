@@ -6,27 +6,30 @@ import {deleteUser} from "../../../store/slices/usersSlice";
 import {useDispatch} from "react-redux";
 import {TrashIcon} from "@heroicons/react/solid";
 import {setLoading} from "../../../store/slices/loadingSlice";
+import {sweetAlert} from "../../../helpers/helpers";
 
-function UserDelete({userId}) {
-    const [openModalDelete, setOpenModalDelete] = useState(false)
+function Delete({userId}) {
+    const [openModalDelete, setOpenModalDelete] = useState(false);
 
     const dispatch = useDispatch();
 
-    const cancelButtonRef = useRef(null)
+    const cancelButtonRef = useRef(null);
 
     // deleting user handler
     let deleteHandler = async () => {
         dispatch(setLoading(true));
-        
+
         setOpenModalDelete(false);
 
         try {
-            await deleteUserFromService(userId)
+            await deleteUserFromService(userId);
 
             dispatch(deleteUser(userId));
-            dispatch(setLoading(false))
+            dispatch(setLoading(false));
+            sweetAlert('کاربر موردنظر با موفقیت حذف شد');
         } catch (error) {
-            console.log(error.response)
+            sweetAlert(error.response.data.message, 'error');
+            dispatch(setLoading(false));
         }
     }
 
@@ -105,4 +108,4 @@ function UserDelete({userId}) {
     );
 }
 
-export default React.memo(UserDelete);
+export default React.memo(Delete);

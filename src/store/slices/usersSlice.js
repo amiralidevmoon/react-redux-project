@@ -23,11 +23,14 @@ export const usersSlice = createSlice({
                     ? {...user, ...payload}
                     : user;
             })
+        },
+        filterUser: (state, {payload}) => {
+            state.list = payload;
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const {setUsers, addUser, deleteUser, editUser} = usersSlice.actions
+export const {setUsers, addUser, deleteUser, editUser, filterUser} = usersSlice.actions
 
 export default usersSlice.reducer

@@ -1,6 +1,7 @@
 import {Route, Routes} from "react-router-dom";
 import Home from "../routes/users/home";
 import Header from "./layouts/header";
+import React from "react";
 
 function App() {
     return (
@@ -13,4 +14,4 @@ function App() {
     );
 }
 
-export default App;
+export default React.memo(App);

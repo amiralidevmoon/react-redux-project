@@ -1,13 +1,14 @@
 import React, {useEffect} from 'react';
-import HeaderTable from "./layouts/headerTable";
-import UserItem from "./userItem";
-import {getUsersFromService} from "../../../services/usersService";
+import TableHeader from "./tableHeader";
+import Item from "./item";
+import {getUsersFromService} from "../../services/usersService";
 import {useDispatch, useSelector} from "react-redux";
-import {setUsers} from "../../../store/slices/usersSlice";
-import Loading from "../../layouts/loading";
-import {setLoading} from "../../../store/slices/loadingSlice";
+import {setUsers} from "../../store/slices/usersSlice";
+import Loading from "../layouts/loading";
+import {setLoading} from "../../store/slices/loadingSlice";
+import {sweetAlert} from "../../helpers/helpers";
 
-function UsersList() {
+function List() {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,13 +16,15 @@ function UsersList() {
     }, [])
 
     const getUsers = async () => {
-        dispatch(setLoading(true))
+        dispatch(setLoading(true));
         try {
             let users = await getUsersFromService();
             dispatch(setUsers(users));
-            dispatch(setLoading(false))
+            dispatch(setLoading(false));
+            sweetAlert('اطلاعات با موفقیت دریافت شد');
         } catch (error) {
-            console.log(error.response)
+            sweetAlert(error.response.data.message, 'error');
+            dispatch(setLoading(false));
         }
     }
 
@@ -29,17 +32,17 @@ function UsersList() {
     const loading = useSelector((state) => state.loading.show);
     return (
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <HeaderTable
+            <TableHeader
                 headerFields={['#', 'Name', 'Family', 'Email', 'Phone', 'Country', 'Gender', 'Type', 'Status', 'Creation Time', 'Settings']}/>
             <tbody>
             {
                 loading
                     ? <Loading/>
-                    : usersList && usersList.map((user) => <UserItem user={user} key={user.id}/>)
+                    : usersList && usersList.map((user) => <Item user={user} key={user.id}/>)
             }
             </tbody>
         </table>
     );
 }
 
-export default UsersList;
+export default React.memo(List);
