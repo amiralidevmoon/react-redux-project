@@ -1,6 +1,8 @@
 import React from 'react';
 import Edit from "./actions/edit";
 import UserDelete from "./actions/delete";
+import {Link} from "react-router-dom";
+import {EyeIcon} from "@heroicons/react/solid";
 
 function Item({user}) {
     return (
@@ -38,6 +40,9 @@ function Item({user}) {
             <td className="px-6 py-4 text-right flex gap-4 text-center ml-6">
                 <Edit user={user}/>
                 <UserDelete userId={user.id}/>
+                <Link to={`/users/${user.id}`} className="h-5 w-5 hover:text-cyan-400 text-cyan-700 transition duration-200">
+                    <EyeIcon/>
+                </Link>
             </td>
         </tr>
     );

@@ -1,8 +1,8 @@
 import React from 'react';
-import {setLoading} from "../../store/slices/loadingSlice";
-import {filterUserFromService} from "../../services/usersService";
-import {filterUser} from "../../store/slices/usersSlice";
-import {sweetAlert} from "../../helpers/helpers";
+import {setLoading} from "../../../store/slices/loadingSlice";
+import {filterUserFromService} from "../../../services/usersService";
+import {filterUser} from "../../../store/slices/usersSlice";
+import {sweetAlert} from "../../../helpers/helpers";
 import {useDispatch} from "react-redux";
 
 function Filter() {
@@ -30,11 +30,11 @@ function Filter() {
             <select id="countries"
                     onChange={(e) => filterUserHandler(e)}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-1/6 focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option selected>all</option>
+                <option defaultValue value="10">all</option>
+                <option value="3">3</option>
                 <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30">30</option>
+                <option value="7">7</option>
+                <option value="9">9</option>
             </select>
         </div>
     );

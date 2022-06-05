@@ -22,7 +22,6 @@ function Edit({user}) {
             lastName: user.lastName,
             company: user.company,
             phoneNumber: user.phoneNumber,
-            email: user.email,
             country: user.country,
             gender: user.gender,
             isActive: user.isActive,
@@ -144,12 +143,9 @@ function Edit({user}) {
                                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 text-left">Email
                                                         address</label>
                                                     <input type="email" id="email"
-                                                           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                           placeholder="amiralidevmoon@gmail.com" defaultValue={user.email} required
-                                                           onChange={(e) => setUser({
-                                                               ...editedUser,
-                                                               email: e.target.value
-                                                           })}/>
+                                                           className="bg-gray-50 border border-gray-300 text-gray-900 dark:text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                           placeholder="amiralidevmoon@gmail.com" value={user.email} required
+                                                           disabled/>
                                                 </div>
                                                 <label htmlFor="default"
                                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 text-left">Country</label>
@@ -224,7 +220,7 @@ function Edit({user}) {
                                                         type="submit"
                                                         className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:col-start-2 sm:text-sm"
                                                     >
-                                                        Create
+                                                        Update
                                                     </button>
                                                     <button
                                                         type="button"

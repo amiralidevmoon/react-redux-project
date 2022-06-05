@@ -11,6 +11,11 @@ export const getUsersFromService = async () => {
     return res.data.data;
 }
 
+export const getSingleUsersFromService = async (userId) => {
+    let res = await usersService.get(`/users/${userId}`);
+    return res.data.data;
+}
+
 export const addUserFromService = async (user) => {
     let res = await usersService.post('/users', user);
     return res.data.data;
