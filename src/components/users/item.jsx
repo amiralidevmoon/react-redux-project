@@ -20,7 +20,7 @@ function Item({user}) {
                 {user.email}
             </td>
             <td className="px-6 py-4 text-center">
-                {user.phoneNumber}
+                +98 {user.phoneNumber}
             </td>
             <td className="px-6 py-4 text-center">
                 {user.country}

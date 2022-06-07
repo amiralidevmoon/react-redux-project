@@ -6,9 +6,9 @@ function Home() {
     return (
         <div
             className="relative flex flex-col gap-20 overflow-x-auto sm:rounded-lg top-52 text-gray-500 dark:text-gray-400 max-w-screen-2xl mx-auto grid place-items-center p-5">
-            <div className="flex items-center align-baseline gap-10">
+            <div className="flex items-center align-baseline gap-6">
                 <h1 className="text-6xl">Welcome to my website</h1>
-                <EmojiHappyIcon className="w-20 h-20"/>
+                <EmojiHappyIcon className="w-20 h-20 text-yellow-300"/>
             </div>
             <div className="flex gap-10">
                 <div className="p-6 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

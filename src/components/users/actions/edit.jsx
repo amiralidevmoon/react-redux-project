@@ -29,8 +29,7 @@ function Edit({user}) {
         }
     );
 
-    // handle create user submit form
-    const createUserHandler = async (e) => {
+    const editUserHandler = async (e) => {
         e.preventDefault();
 
         dispatch(setLoading(true));
@@ -87,10 +86,10 @@ function Edit({user}) {
                                 <div>
                                     <div className="text-center">
                                         <Dialog.Title as="h3" className="text-lg dark:text-white leading-6 font-medium text-gray-900">
-                                            Create User
+                                            Edit User
                                         </Dialog.Title>
                                         <div className="mt-5">
-                                            <form onSubmit={(e) => createUserHandler(e)}>
+                                            <form onSubmit={(e) => editUserHandler(e)}>
                                                 <div className="grid gap-6 mb-6 lg:grid-cols-2 z-150">
                                                     <div>
                                                         <label htmlFor="first_name"
@@ -143,7 +142,7 @@ function Edit({user}) {
                                                            className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300 text-left">Email
                                                         address</label>
                                                     <input type="email" id="email"
-                                                           className="bg-gray-50 border border-gray-300 text-gray-900 dark:text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                           className="cursor-not-allowed bg-gray-50 border border-gray-300 text-gray-900 dark:text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                            placeholder="amiralidevmoon@gmail.com" value={user.email} required
                                                            disabled/>
                                                 </div>

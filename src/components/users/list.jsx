@@ -10,7 +10,6 @@ import {USER_PER_PAGE} from "../../utils/constants";
 import Pagination from "./layouts/pagination";
 import Users from "./users";
 
-
 function List() {
     const dispatch = useDispatch();
 

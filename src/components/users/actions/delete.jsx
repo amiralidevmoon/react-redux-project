@@ -7,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {TrashIcon} from "@heroicons/react/solid";
 import {setLoading} from "../../../store/slices/loadingSlice";
 import {sweetAlert} from "../../../helpers/helpers";
+import {Link} from "react-router-dom";
 
 function Delete({userId}) {
     const [openModalDelete, setOpenModalDelete] = useState(false);
@@ -15,7 +16,6 @@ function Delete({userId}) {
 
     const cancelButtonRef = useRef(null);
 
-    // deleting user handler
     let deleteHandler = async () => {
         dispatch(setLoading(true));
 
@@ -83,21 +83,20 @@ function Delete({userId}) {
                                     </div>
                                 </div>
                                 <div className="mt-5 sm:mt-4 sm:ml-10 sm:pl-4 sm:flex justify-center">
-                                    <button
-                                        type="button"
-                                        className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm"
-                                        onClick={deleteHandler}
+                                    <Link to="/users"
+                                          className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm"
+                                          onClick={deleteHandler}
                                     >
                                         حذف
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 px-4 py-2 bg-white text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                                        onClick={() => setOpenModalDelete(false)}
-                                        ref={cancelButtonRef}
+                                    </Link>
+                                    <Link to="/users"
+                                          type="button"
+                                          className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 px-4 py-2 bg-white text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                          onClick={() => setOpenModalDelete(false)}
+                                          ref={cancelButtonRef}
                                     >
                                         انصراف
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         </Transition.Child>
