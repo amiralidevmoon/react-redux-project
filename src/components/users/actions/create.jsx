@@ -42,7 +42,19 @@ function Create() {
             try {
                 let newUser = await addUserFromService(user);
                 dispatch(addUser(newUser));
-                setUser({});
+                setUser({
+                    firstName: '',
+                    lastName: '',
+                    company: '',
+                    phoneNumber: '',
+                    email: '',
+                    password: (Math.random() * 1000).toString(),
+                    country: 'IR',
+                    gender: 'male',
+                    isActive: false,
+                    isAdmin: false,
+                    createdAt: Date.now(),
+                });
                 dispatch(setLoading(false));
                 sweetAlert('کاربر موردنظر با موفقیت ایجاد شد');
             } catch (error) {
