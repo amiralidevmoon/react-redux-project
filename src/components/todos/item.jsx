@@ -14,7 +14,7 @@ function Item({todo}) {
 
         try {
             await deleteTodoFromService(todo.id);
-
+            console.log(todo.id)
             deleteTodo(todo.id);
             dispatch(setLoading(false));
             sweetAlert('آیتم موردنظر با موفقیت حذف شد');

@@ -32,7 +32,7 @@ function Index() {
 
     let activeClassName = "inline-block p-4 text-blue-600 rounded-t-lg border-b-2 border-blue-600 active dark:text-blue-500 dark:border-blue-500";
     let notActiveClassName = "inline-block p-4 rounded-t-lg border-b-2 border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300";
-
+    console.log(todos)
     return (
         <div
             className="relative flex flex-col gap-20 overflow-x-auto sm:rounded-lg top-52 text-gray-500 dark:text-gray-400 max-w-screen-2xl mx-auto grid place-items-center p-5">

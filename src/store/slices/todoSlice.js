@@ -14,8 +14,8 @@ export const todoSlice = createSlice({
         addTodo: (state, action) => {
             state.list.push(action.payload)
         },
-        deleteTodo: (state, action) => {
-            state.list = state.list.filter(todo => todo.id !== action.payload)
+        deleteTodo: (state, {payload}) => {
+            state.list = state.list.filter(todo => todo.id !== payload)
         },
         toggleStatusTodo: (state, {payload}) => {
             state.list = state.list.map((todo) => {

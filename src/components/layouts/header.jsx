@@ -5,7 +5,8 @@ const Header = () => {
     const [burgerMenu, setburgerMenu] = useState(false);
 
     const activeStyle = {
-        color: 'white'
+        color: 'white',
+        fontWeight: 'bold',
     };
 
     return (
@@ -75,7 +76,7 @@ const Header = () => {
                             : "hidden w-full md:block md:w-auto"
                     }
                 >
-                    <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+                    <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium px-3">
                         <li>
                             <NavLink to="/" style={({isActive}) =>
                                 isActive ? activeStyle : undefined
